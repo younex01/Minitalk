@@ -6,26 +6,48 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 01:38:24 by yelousse          #+#    #+#             */
-/*   Updated: 2022/06/17 16:42:39 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/06/17 20:57:22 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	handle_sigusr1(int sig)
-{
-	
-}
+// void	handler(int sig, siginfo_t *info, void *context)
+
+// struct sigaction	sa;
+// sa.sa_sigaction = &handler;
+// 	sa.sa_flags = SA_SIGINFO;
+// 	sigaction(SIGUSR1, &sa, NULL);
+// 	sigaction(SIGUSR2, &sa, NULL);
+
+// void	handle_sigusr1(int sig)
+// {
+// }
 
 int	main(int ac, char **av)
 {
 	int	pid_ser;
-	struct sigaction	sa;
-	sa.sa_handler = &handle_sigusr1;
-	sigaction(SIGUSR1, &sa, NULL);
+	int i;
+	char tmp;
+	int j;
+
+	i = 0;
 	if (ac == 3)
 	{
 		pid_ser = ft_atoi(av[1]);
+		while(av[2][i])
+		{
+			tmp = av[2][i];
+			j = 7;
+			while(j)
+			{
+				if(tmp >> j & 1)
+					kill(pid_ser,SIGUSR1);
+				else
+					kill(pid_ser,SIGUSR2);
+				j--;
+			}
+		}
 	}
 	return (0);
 }
