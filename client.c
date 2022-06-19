@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 01:38:24 by yelousse          #+#    #+#             */
-/*   Updated: 2022/06/17 20:57:22 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/06/19 03:46:51 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,29 @@
 
 int	main(int ac, char **av)
 {
-	int	pid_ser;
-	int i;
-	char tmp;
-	int j;
+	int		pid_ser;
+	int		i;
+	char	tmp;
+	int		j;
 
 	i = 0;
 	if (ac == 3)
 	{
 		pid_ser = ft_atoi(av[1]);
-		while(av[2][i])
+		while (av[2][i])
 		{
 			tmp = av[2][i];
 			j = 7;
-			while(j)
+			while (j)
 			{
-				if(tmp >> j & 1)
-					kill(pid_ser,SIGUSR1);
+				if (tmp >> j & 1)
+					kill(pid_ser, SIGUSR1);
 				else
-					kill(pid_ser,SIGUSR2);
+					kill(pid_ser, SIGUSR2);
 				j--;
+				usleep(3000);
 			}
+			i++;
 		}
 	}
 	return (0);
