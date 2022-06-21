@@ -12,24 +12,26 @@
 
 #include "minitalk.h"
 
-// void	handler(int sig, siginfo_t *info, void *context)
+void	send_byte(int pid, char c)
+{
+	int	j;
 
-// struct sigaction	sa;
-// sa.sa_sigaction = &handler;
-// 	sa.sa_flags = SA_SIGINFO;
-// 	sigaction(SIGUSR1, &sa, NULL);
-// 	sigaction(SIGUSR2, &sa, NULL);
-
-// void	handle_sigusr1(int sig)
-// {
-// }
+	j = 7;
+	while (j >= 0)
+	{
+		if (c >> j & 1)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		j--;
+		usleep(800);
+	}
+}
 
 int	main(int ac, char **av)
 {
 	int		pid_ser;
 	int		i;
-	char	tmp;
-	int		j;
 
 	i = 0;
 	if (ac == 3)
@@ -37,17 +39,7 @@ int	main(int ac, char **av)
 		pid_ser = ft_atoi(av[1]);
 		while (av[2][i])
 		{
-			tmp = av[2][i];
-			j = 7;
-			while (j >= 0)
-			{
-				if (tmp >> j & 1)
-					kill(pid_ser, SIGUSR1);
-				else
-					kill(pid_ser, SIGUSR2);
-				j--;
-				usleep(800);
-			}
+			send_byte(pid_ser, av[2][i]);
 			i++;
 		}
 	}

@@ -12,21 +12,9 @@
 
 #include "minitalk.h"
 
-// void	handler(int sig, siginfo_t *info, void *context)
-
-// struct sigaction	sa;
-// sa.sa_sigaction = &handler;
-// 	sa.sa_flags = SA_SIGINFO;
-// 	sigaction(SIGUSR1, &sa, NULL);
-// 	sigaction(SIGUSR2, &sa, NULL);
-
-// void	handle_sigusr1(int sig)
-// {
-// }
-
 void	send_byte(int pid, char c)
 {
-	int j;
+	int	j;
 
 	j = 7;
 	while (j >= 0)
